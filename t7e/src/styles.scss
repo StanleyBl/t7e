@@ -1,0 +1,149 @@
+* {
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+body {
+    min-width: 100%;
+    min-height: 100vh;
+    background: rgb(57,0,47);
+    background: linear-gradient(118deg, rgba(57,0,47,1) 0%, rgba(46,4,78,1) 35%, rgba(0,17,60,1) 100%);
+}
+
+button {
+    padding: .5rem 2rem;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+
+    &:hover {
+        animation-name: btnHover;
+        animation-duration: 2s;
+        animation-timing-function: ease;
+    }
+}
+
+h1, h2, h3, h4, h5 {
+    color: white;
+}
+
+.fx {
+    display: flex;
+  
+    &.fx-col {
+      flex-direction: column;
+    }
+  
+    &.wrap {
+      flex-wrap: wrap;
+    }
+  
+    &.jy-space-between {
+      justify-content: space-between;
+    }
+    &.jy-space-evenly {
+      justify-content: space-evenly;
+    }
+    &.jy-space-around {
+      justify-content: space-around;
+    }
+    &.jy-center {
+      justify-content: center;
+    }
+    &.jy-right {
+      justify-content: right;
+    }
+    &.jy-end {
+      justify-content: flex-end;
+    }
+  
+    &.align-center {
+      align-items: center;
+    }
+    &.align-start {
+      align-items: flex-start;
+    }
+    &.align-baseline {
+      align-items: baseline;
+    }
+    &.align-end {
+      align-items: flex-end;
+    }
+  
+    .fx-grow {
+      flex: 1 1 0px;
+    }
+    .fx-grow-one {
+      flex-grow: 1;
+    }
+  }
+
+  .gap-5 {
+    gap: 5px;
+  }
+  
+  .gap-10 {
+    gap: 10px;
+  }
+  
+  .gap-20 {
+    gap: 20px;
+  }
+
+  .material-icons {
+      line-height: unset;
+  }
+
+@keyframes btnHover {
+    0% {
+        background-color: black;
+    }
+
+    5% {
+        filter: blur(5px);
+        border-color: white;
+    }
+    
+    10% {
+        background-color: rgb(37, 37, 37);
+        color: rgb(114, 86, 179);
+    }
+    
+    30% {
+        filter: blur(0px);
+    }
+
+    100% {
+        background-color: black;
+        color: white;
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.card {
+    background-color: rgb(18 18 18 / 47%);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+/* DIALOGS */
+
+.mat-dialog-container {
+    background-color: #1c1c1c;
+}
+
+.form-element {
+    margin-bottom: 1rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}

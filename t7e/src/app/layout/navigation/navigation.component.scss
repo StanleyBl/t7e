@@ -1,0 +1,44 @@
+.navigation-bar {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    background-color: rgb(0 0 0 / 56%);
+    position: fixed;
+    overflow: hidden;
+}
+
+.navigation-inner {
+    height: 20px;
+
+    &.change {
+        animation-name: navigationChange;
+        animation-duration: 1s;
+    }
+}
+
+.nav-item {
+    color: white;
+
+    &:hover {
+        animation-name: btnHover;
+        animation-duration: 2s;
+        animation-timing-function: ease;
+        cursor: pointer;
+    }
+}
+
+@keyframes navigationChange {
+    0% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}

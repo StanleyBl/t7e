@@ -1,0 +1,11 @@
+<h2>Languages</h2>
+
+<div class="language-list">
+    <div class="language-item" *ngFor="let item of data.languages">
+        <mat-checkbox [checked]="isChecked(item.id)" (change)="onChange(item, $event.checked)">{{item.languageName}} [{{item.languageIsoCode}}]</mat-checkbox>
+    </div>
+</div>
+
+<mat-dialog-actions>
+    <button (click)="onSubmit()">Speichern</button>
+</mat-dialog-actions>

@@ -1,0 +1,18 @@
+.project-item {
+    padding: 2rem;
+    background-color: rgb(18 18 18 / 47%);
+    color: white;
+    border-radius: 5px;
+    margin: 2rem;
+
+    &:hover {
+        animation-name: btnHover;
+        animation-duration: 2s;
+        animation-timing-function: ease;
+        cursor: pointer;
+    }
+}
+
+.logo img {
+    max-width: 150px;
+}

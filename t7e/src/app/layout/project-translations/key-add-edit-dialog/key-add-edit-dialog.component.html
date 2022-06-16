@@ -1,0 +1,22 @@
+<h2>Add Key</h2>
+
+<div>
+    <form [formGroup]="form">
+                
+        <div class="form-element">
+            <mat-form-field>
+                <mat-label>Key (Selector)</mat-label>
+                <input matInput formControlName="key" placeholder="Key">
+            </mat-form-field>
+        </div>
+
+        <div class="form-element">
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" placeholder="Description" [rows]="3"></textarea>
+            </mat-form-field>
+        </div>
+
+       
+    </form>
+</div>

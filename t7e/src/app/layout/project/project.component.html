@@ -1,0 +1,22 @@
+<div class="project-wrapper">
+    <div class="project-list">
+        <div class="project-item" *ngFor="let item of projects$ | async" [routerLink]="'/translations/' + item.id">
+            <div class="fx gap-20">
+                <div class="logo">
+                    <img [src]="item.logoUrl">
+                </div>
+                <div class="info">
+                    <h2>{{item.name}}</h2>
+                    <p>{{item.description}}</p>
+                    <hr>
+        
+                    <div class="info">
+                        <div class="languages fx gap-20">
+                            <div *ngFor="let language of item.availableLanguages">[{{language.languageIsoCode}}]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

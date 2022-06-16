@@ -1,0 +1,53 @@
+<div class="edit-wrapper card">
+    <h2 *ngIf="newProject">Add new Project</h2>
+    <h2 *ngIf="!newProject">Edit Project</h2>
+
+    <hr>
+
+    <div class="box-content">
+
+        <h3>General Information</h3>
+
+        <form [formGroup]="projectForm">
+                
+            <div class="form-element">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" placeholder="Name">
+                </mat-form-field>
+            </div>
+
+            <div class="form-element">
+                <mat-form-field>
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Description" [rows]="3"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="form-element">
+                <mat-form-field>
+                    <mat-label>Logo Url</mat-label>
+                    <input matInput formControlName="logoUrl" placeholder="Logo Url">
+                </mat-form-field>
+            </div>
+
+        </form>
+        
+        <div class="fx gap-20 align-start">
+            <h3>Languages</h3>
+            <button class="add-btn" (click)="onAddLanguage()"><mat-icon>edit</mat-icon></button>
+        </div>
+
+        <div class="language-list">
+            <ul>
+                <li *ngFor="let language of project?.availableLanguages">{{language.languageName}} [{{language.languageIsoCode}}]</li>
+            </ul>
+        </div>
+        
+        <div class="actions">
+            <button [disabled]="projectForm.invalid" (click)="onSubmit()">
+              Speichern
+            </button>
+        </div>
+    </div>
+</div>

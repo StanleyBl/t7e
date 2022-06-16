@@ -1,0 +1,17 @@
+<nav class="navigation-bar">
+    <div class="navigation-inner fx jy-space-between align-center" [class.change]="change">
+        <div class="back">
+            <span class="nav-item" *ngIf="barItems?.backAction" [routerLink]="barItems?.backAction">
+                <mat-icon>chevron_left</mat-icon>
+            </span>
+        </div>
+        <div class="navigation-items">
+            <div class="fx gap-20">
+                <div class="nav-item fx align-center gap-5" *ngFor="let item of barItems?.items" (click)="onClick(item)">
+                    <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+                    {{item.name}}
+                </div>
+            </div>
+        </div>        
+    </div>
+</nav>
