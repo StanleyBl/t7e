@@ -23,26 +23,87 @@ namespace t7e.db.Services
             _mapper = mapper;
         }
 
-        public async Task<List<TranslationKeyDto>> GetTranslationsForProjectAsync(Guid projectId)
+        public async Task<List<TranslationKeyDto>> GetTranslationsForProjectAsync(Guid projectId, string searchTerm = null)
         {
-            var result = await _ctx.TranslationKeys
+            //var result = await _ctx.TranslationKeys
+            //    .Include(e => e.Project)
+            //    .ThenInclude(e => e.ProjectLanguages)
+            //    .ThenInclude(e => e.Language)
+            //    .Include(e => e.Translations)
+            //    .ThenInclude(e => e.Language)
+            //    .Where(x => x.ProjectId == projectId)
+            //    .OrderByDescending(x => x.Created)
+            //    .AsNoTracking()
+            //    .ToListAsync();
+
+            var query = _ctx.TranslationKeys
+                .Include(e => e.Project)
+                .ThenInclude(e => e.ProjectLanguages)
+                .ThenInclude(e => e.Language)
                 .Include(e => e.Translations)
                 .ThenInclude(e => e.Language)
-                .Where(x => x.ProjectId == projectId)
+                .Where(x => x.ProjectId == projectId);
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query
+                    .Where(x => x.Key.Contains(searchTerm) || x.Description.Contains(searchTerm) ||
+                                x.Translations.Any(y => y.Value.Contains(searchTerm)));
+            }
+
+            var result = await query
+                .OrderByDescending(x => x.Created)
                 .AsNoTracking()
                 .ToListAsync();
 
             return result.Select(x => _mapper.Map<TranslationKeyDto>(x)).ToList();
         }
 
-        public async Task AddKeyAsync(TranslationKeyDto key)
+        public async Task<TranslationKeyDto> AddKeyAsync(TranslationKeyDto key)
         {
             try
             {
                 var dbKey = _mapper.Map<TranslationKey>(key);
                 dbKey.Id = Guid.NewGuid();
+                dbKey.Created = DateTime.Now;
+                dbKey.Updated = DateTime.Now;
                 _ctx.TranslationKeys.Add(dbKey);
                 await _ctx.SaveChangesAsync();
+
+                var result = await _ctx.TranslationKeys
+                    .Include(e => e.Project)
+                    .ThenInclude(e => e.ProjectLanguages)
+                    .ThenInclude(e => e.Language)
+                    .Include(e => e.Translations)
+                    .ThenInclude(e => e.Language)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Id == dbKey.Id);
+
+                return _mapper.Map<TranslationKeyDto>(result);
+            }
+            catch (Exception e)
+            {
+                // log?
+                throw e;
+            }
+        }
+
+        public async Task<TranslationKeyDto> UpdateKeyAsync(TranslationKeyDto key)
+        {
+            try
+            {
+                var dbKey = await _ctx.TranslationKeys.FirstOrDefaultAsync(x => x.Id == key.Id);
+
+                if (dbKey == null)
+                    return null;
+
+                dbKey.Updated = DateTime.Now;
+                dbKey.Key = key.Key;
+                dbKey.Description = key.Description;
+
+                await _ctx.SaveChangesAsync();
+
+                return key;
             }
             catch (Exception e)
             {

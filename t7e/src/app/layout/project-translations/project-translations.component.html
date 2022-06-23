@@ -1,3 +1,25 @@
-<h2>{{project?.name}}</h2>
+<div class="header fx gap-20 align-center jy-space-between">
+    <div>
+        <div class="fx gap-20 align-center">
+            <div>
+                <img class="logo" [src]="project?.logoUrl">
+            </div>
+            <h2>{{project?.name}}</h2>
+        </div>
+    </div>
+
+    <div class="toolbar">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput [formControl]="searchTerm" placeholder="Search">
+        </mat-form-field>
+    </div>
+</div>
 
 
+
+<div class="translation-list">
+    <div class="list-item" *ngFor="let key of translationKeys">
+        <app-translation-key [key]="key"></app-translation-key>
+    </div>
+</div>

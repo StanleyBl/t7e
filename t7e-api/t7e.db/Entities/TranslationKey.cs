@@ -24,6 +24,10 @@ namespace t7e.db.Entities
 
         public string Description { get; set; }
 
+        public DateTime? Created { get; set; }
+
+        public DateTime? Updated { get; set; }
+
         public virtual Project Project { get; set; }
 
         public ICollection<Translation> Translations { get; set; }

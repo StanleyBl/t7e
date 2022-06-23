@@ -31,6 +31,8 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
 import { ProjectTranslationsComponent } from './layout/project-translations/project-translations.component';
 import { LanguageAddEditDialogComponent } from './layout/project/project-add-update/language-add-edit-dialog/language-add-edit-dialog.component';
 import { KeyAddEditDialogComponent } from './layout/project-translations/key-add-edit-dialog/key-add-edit-dialog.component';
+import { TranslationKeyComponent } from './layout/project-translations/translation-key/translation-key.component';
+import { TranslationInputComponent } from './layout/project-translations/translation-key/translation-input/translation-input.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { KeyAddEditDialogComponent } from './layout/project-translations/key-add
     NavigationComponent,
     ProjectTranslationsComponent,
     LanguageAddEditDialogComponent,
-    KeyAddEditDialogComponent
+    KeyAddEditDialogComponent,
+    TranslationKeyComponent,
+    TranslationInputComponent
   ],
   imports: [
     BrowserModule,

@@ -8,5 +8,6 @@ namespace t7e.db.Entities
         public Project Project { get; set; }
         public Guid LanguageId { get; set; }
         public Language Language { get; set; }
+        public int? Order { get; set; }
     }
 }

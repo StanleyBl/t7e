@@ -1,0 +1,20 @@
+<div class="fx gap-10 jy-space-between">
+    <div class="fx-grow-one">
+        <mat-form-field>
+            <mat-label>{{translation.languageName}}</mat-label>
+            <textarea matInput placeholder="{{translation.languageName}}" [rows]="1" [(ngModel)]="translation.value"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+
+        <div *ngIf="translationCopy.value !== translation.value || translationCopy.reviewed !== translation.reviewed" class="fx gap-20">
+            <button class="btn-tiny" (click)="onSubmit()"><mat-icon>check</mat-icon> Save</button>            
+            <button class="btn-tiny" (click)="onCancel()"><mat-icon>cancel</mat-icon> Cancel</button>            
+        </div>
+    </div>
+    <div>
+        <mat-checkbox [(ngModel)]="translation.reviewed" [color]="'primary'">Reviewed</mat-checkbox>
+    </div>
+</div>

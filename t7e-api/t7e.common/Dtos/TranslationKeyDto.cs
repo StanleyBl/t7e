@@ -14,6 +14,7 @@ namespace t7e.common.Dtos
             Translations = new List<TranslationDto>();
         }
 
+        [Required]
         public Guid Id { get; set; }
 
         [Required]
@@ -23,6 +24,10 @@ namespace t7e.common.Dtos
         public Guid ProjectId { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime? Created { get; set; }
+
+        public DateTime? Updated { get; set; }
 
         public List<TranslationDto> Translations { get; set; }
     }

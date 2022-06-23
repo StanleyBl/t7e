@@ -1,0 +1,17 @@
+<div class="key-wrapper fx gap-10">
+    <div class="key-info">
+        <div class="key" title="{{key.key}}">
+            <a (click)="onKeyClick()">{{key.key}}</a>
+        </div>
+
+        <div class="description">
+            {{key.description}}
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="translations">
+        <div class="translation-item" *ngFor="let translation of key.translations">
+            <app-translation-input [translation]="translation"></app-translation-input>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,8 @@ namespace t7e.common.Dtos
         [Required]
         public Guid TranslationKeyId { get; set; }
 
+        public string LanguageName { get; set; }
+
         public string Value { get; set; }
 
         public bool Reviewed { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using t7e.db.Context;
 
 namespace t7e.db.Migrations
 {
     [DbContext(typeof(T7eDbContext))]
-    partial class T7eDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220617072636_AddedCreationOrder")]
+    partial class AddedCreationOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

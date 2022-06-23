@@ -9,9 +9,11 @@ namespace t7e.db.Services.Interfaces
 {
     public interface ITranslationService
     {
-        Task<List<TranslationKeyDto>> GetTranslationsForProjectAsync(Guid projectId);
+        Task<List<TranslationKeyDto>> GetTranslationsForProjectAsync(Guid projectId, string searchTerm = null);
 
-        Task AddKeyAsync(TranslationKeyDto key);
+        Task<TranslationKeyDto> AddKeyAsync(TranslationKeyDto key);
+
+        Task<TranslationKeyDto> UpdateKeyAsync(TranslationKeyDto key);
 
         Task RemoveKeyAsync(Guid id);
 

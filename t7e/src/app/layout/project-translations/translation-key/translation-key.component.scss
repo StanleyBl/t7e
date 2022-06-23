@@ -1,0 +1,44 @@
+.key-wrapper {
+    padding: 2rem;
+    background-color: rgb(18 18 18 / 47%);
+    color: white;
+    border-radius: 5px;   
+}
+
+.key-info {
+    width: 200px;
+}
+
+.key {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.divider {
+    border-left: 1px solid white;
+}
+
+.translations {
+    flex: 1;
+}
+
+.language-code {
+    color: gray;
+}
+
+.translation-item {
+    background-color: rgb(18 18 18 / 47%);    
+    padding: .3rem;
+    
+    &:not(:last-child) {
+        margin-bottom: .5rem;
+    }
+}
+
+.description {
+    color: #939393;
+    margin-top: .5rem;
+    font-size: .8rem;
+}

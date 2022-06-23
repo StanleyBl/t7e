@@ -1,4 +1,5 @@
-<h2>Add Key</h2>
+<h2 *ngIf="newKey">Add Key</h2>
+<h2 *ngIf="!newKey">Edit Key</h2>
 
 <div>
     <form [formGroup]="form">
@@ -20,3 +21,7 @@
        
     </form>
 </div>
+
+<mat-dialog-actions>
+    <button (click)="onSubmit()">Speichern</button>
+</mat-dialog-actions>

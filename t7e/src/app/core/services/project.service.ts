@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -19,8 +19,13 @@ export class ProjectService {
     return this.http.get<Project[]>(this.projectBaseUrl);
   }
 
-  getProjectById(id: string): Observable<Project> {
-    return this.http.get<Project>(this.projectBaseUrl + id);
+  getProjectById(id: string, searchTerm?: string): Observable<Project> {
+    let params = new HttpParams();
+    if (searchTerm) {
+      params = params.append('searchTerm', searchTerm);
+    }
+    
+    return this.http.get<Project>(this.projectBaseUrl + id, {params});
   }
 
   addOrUpdateProject(project: Project): Observable<any> {

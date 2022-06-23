@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using AutoMapper;
 using t7e.common.Dtos;
 using t7e.db.Entities;
 
@@ -38,7 +40,42 @@ namespace t7e.Mapping
 
             CreateMap<Language, LanguageDto>().ReverseMap();
 
-            CreateMap<TranslationKey, TranslationKeyDto>().ReverseMap();
+            CreateMap<TranslationKeyDto, TranslationKey>();
+
+            CreateMap<TranslationKey, TranslationKeyDto>()
+                .AfterMap((src, dest) =>
+                {
+                    dest.Translations.Clear();
+
+                    foreach (var lang in src.Project.ProjectLanguages.OrderBy(x => x.Order))
+                    {
+                        var translation = src.Translations.FirstOrDefault(x => x.LanguageId == lang.LanguageId);
+                        if (translation != null)
+                        {
+                            dest.Translations.Add(new TranslationDto
+                            {
+                                LanguageId = lang.LanguageId,
+                                Reviewed = translation.Reviewed,
+                                Id = translation.Id,
+                                TranslationKeyId = translation.TranslationKeyId,
+                                Value = translation.Value,
+                                LanguageName = lang.Language?.LanguageName
+                            });
+                        }
+                        else
+                        {
+                            dest.Translations.Add(new TranslationDto
+                            {
+                                Id = Guid.Empty,
+                                TranslationKeyId = src.Id,
+                                LanguageId = lang.LanguageId,
+                                Reviewed = false,
+                                LanguageName = lang.Language?.LanguageName
+                            });
+                        }
+                    }
+                });
+
             CreateMap<Translation, TranslationDto>().ReverseMap();
         }
     }
