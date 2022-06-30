@@ -1,0 +1,22 @@
+.status {
+    height: 30px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #2c2844;
+
+    .label {
+        z-index: 5;
+        margin-left: .5rem;
+    }
+}
+
+.status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    background-color: #2b54579c;
+    transition: width 1s ease;
+}

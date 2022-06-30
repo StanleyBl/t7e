@@ -33,6 +33,63 @@ namespace t7e.db.Services
             return list.Select(x => _mapper.Map<ProjectDto>(x)).ToList();
         }
 
+        public async Task<List<ProjectInfoDto>> GetProjectInfoListAsync()
+        {
+            var list = await _ctx.Projects
+                .Include(e => e.ProjectLanguages)
+                .ThenInclude(e => e.Language)
+                .Include(e => e.TranskationKeys)
+                .ThenInclude(e => e.Translations)
+                .AsNoTracking()
+                .ToListAsync();
+
+            var result = new List<ProjectInfoDto>();
+            foreach (var project in list)
+            {
+                var entry = new ProjectInfoDto
+                {
+                    Id = project.Id,
+                    Name = project.Name,
+                    Description = project.Description,
+                    LogoUrl = project.LogoUrl,
+                    TranslationCount = project.TranskationKeys.Count
+                };
+
+                foreach (var language in project.ProjectLanguages.OrderBy(x => x.Order))
+                {
+                    var translationEntry = new TranslationInfoDto
+                    {
+                        LanguageId = language.LanguageId, 
+                        LanguageName = language.Language.LanguageName,
+                        LanguageIsoCode = language.Language.LanguageIsoCode,
+                    };
+
+                    foreach (var key in project.TranskationKeys)
+                    {
+                        var translation = key.Translations.FirstOrDefault(x => x.LanguageId == language.LanguageId);
+
+                        if (translation == null || string.IsNullOrEmpty(translation?.Value))
+                        {
+                            translationEntry.IncompleteCount++;
+                            continue;
+                        }
+
+                        if (translation.Reviewed)
+                            translationEntry.ReviewedCount++;
+
+                        if (!string.IsNullOrEmpty(translation.Value))
+                            translationEntry.CompleteCount++;
+                    }
+
+                    entry.Translations.Add(translationEntry);
+                }
+
+                result.Add(entry);
+            }
+
+            return result;
+        }
+
         public async Task<ProjectDto> GetProjectByIdAsync(Guid id)
         {
             var result = await _ctx.Projects

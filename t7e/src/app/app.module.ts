@@ -33,6 +33,7 @@ import { LanguageAddEditDialogComponent } from './layout/project/project-add-upd
 import { KeyAddEditDialogComponent } from './layout/project-translations/key-add-edit-dialog/key-add-edit-dialog.component';
 import { TranslationKeyComponent } from './layout/project-translations/translation-key/translation-key.component';
 import { TranslationInputComponent } from './layout/project-translations/translation-key/translation-input/translation-input.component';
+import { StatusBarComponent } from './layout/Shared/Components/status-bar/status-bar.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TranslationInputComponent } from './layout/project-translations/transla
     LanguageAddEditDialogComponent,
     KeyAddEditDialogComponent,
     TranslationKeyComponent,
-    TranslationInputComponent
+    TranslationInputComponent,
+    StatusBarComponent
   ],
   imports: [
     BrowserModule,

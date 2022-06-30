@@ -9,6 +9,8 @@ namespace t7e.db.Services.Interfaces
     {
         Task<List<ProjectDto>> GetProjectListAsync();
 
+        Task<List<ProjectInfoDto>> GetProjectInfoListAsync();
+
         Task<ProjectDto> GetProjectByIdAsync(Guid id);
 
         Task AddOrUpdateProjectAsync(ProjectDto project);

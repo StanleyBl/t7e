@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Project } from '../models/project';
+import { Project, ProjectInfo } from '../models/project';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class ProjectService {
 
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.projectBaseUrl);
+  }
+
+  getProjectInfoList(): Observable<ProjectInfo[]> {
+    return this.http.get<ProjectInfo[]>(this.projectBaseUrl + 'info');
   }
 
   getProjectById(id: string, searchTerm?: string): Observable<Project> {

@@ -11,9 +11,34 @@
                     <hr>
         
                     <div class="info">
-                        <div class="languages fx gap-20">
-                            <div *ngFor="let language of item.availableLanguages">[{{language.languageIsoCode}}]</div>
+                        <h4>Translations: {{item?.translationCount}}</h4>
+
+                        <div class="status">
+                            <app-status-bar [label]="'Complete'" [percent]="item?.completeCountPercent"></app-status-bar>
                         </div>
+                        <div class="status">
+                            <app-status-bar [label]="'Reviewed'" [percent]="item?.reviewedCountPercent"></app-status-bar>
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Language</th>
+                                    <th>Complete</th>
+                                    <th>Incomplete</th>
+                                    <th>Reviewed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let translation of item.translations">
+                                    <td>{{translation.languageName}}</td>
+                                    <td>{{translation.completeCount}}</td>
+                                    <td>{{translation.incompleteCount}}</td>
+                                    <td>{{translation.reviewedCount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>   
+
                     </div>
                 </div>
             </div>

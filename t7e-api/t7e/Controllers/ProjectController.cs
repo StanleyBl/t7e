@@ -27,6 +27,13 @@ namespace t7e.Controllers
             return Ok(list);
         }
 
+        [HttpGet("info")]
+        public async Task<IActionResult> GetInfo()
+        {
+            var list = await _projectService.GetProjectInfoListAsync();
+            return Ok(list);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
