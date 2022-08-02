@@ -10,6 +10,7 @@ import { NavigationService } from 'src/app/core/services/internal/navigation.ser
 import { ProjectService } from 'src/app/core/services/project.service';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { KeyAddEditDialogComponent } from './key-add-edit-dialog/key-add-edit-dialog.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 
 @Component({
   selector: 'app-project-translations',
@@ -45,7 +46,8 @@ export class ProjectTranslationsComponent implements OnInit {
   setNavigationItems() {
     const items: NavigationItem[] = [
       {icon: 'add', name: 'Add Key', action: () => this.onAddKey()},
-      {icon: 'edit', name: 'Edit Project', route: 'projects/edit/' + this.projectId}
+      {icon: 'upload', name: 'Import File', action: () => this.onImportFile()},
+      {icon: 'edit', name: 'Edit Project', route: 'projects/edit/' + this.projectId},
     ];
     this.navigationService.navigation$.next({backAction: '/projects', items: items});
   }
@@ -54,7 +56,7 @@ export class ProjectTranslationsComponent implements OnInit {
     this.isLoading = true;
     forkJoin({
       project: this.projectService.getProjectById(this.projectId),
-      translations: this.translationService.getTranslations(this.projectId, this.searchTerm.value)
+      translations: this.translationService.getTranslations(this.projectId, this.searchTerm.value),
     })
     .subscribe(res => {
       this.project = res.project;
@@ -80,5 +82,9 @@ export class ProjectTranslationsComponent implements OnInit {
         this.translationKeys.unshift(res);
       }
     });
+  }
+
+  onImportFile() {
+    this.dialog.open(UploadFileComponent, {data: this.project});
   }
 }

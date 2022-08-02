@@ -1,0 +1,48 @@
+<div>
+  <mat-form-field class="file-select">
+      <div>
+        <mat-toolbar>
+          <!-- Display files names -->
+          <input matInput [(ngModel)]="fileAttr" readonly name="name" />
+          <!-- Browse Button -->
+          <button mat-flat-button color="primary">Browse File</button>
+        </mat-toolbar>
+        <!-- Fetch selected filed on change -->
+        <input
+          type="file"
+          #fileInput
+          id="uploadFile"
+          (change)="uploadFileEvt($event)"
+          name="uploadFile"
+        />
+      </div>
+    </mat-form-field>
+</div>
+
+<ng-container *ngIf="model.file">
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Language</mat-label>
+      <mat-select [(ngModel)]="model.languageId">
+        <mat-option *ngFor="let lang of data.availableLanguages" [value]="lang.id">
+          {{lang.languageName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-checkbox [(ngModel)]="model.overrideExisting" [color]="'primary'">Override existing</mat-checkbox>
+  </div>
+
+  <div>
+    <mat-checkbox [(ngModel)]="model.markNewAsReviewed" [color]="'primary'">Mark new as reviewed</mat-checkbox>
+  </div>
+
+</ng-container>
+
+<mat-dialog-actions>
+  <button (click)="onSubmit()" [disabled]="!isValid()">Upload</button>
+</mat-dialog-actions>
+

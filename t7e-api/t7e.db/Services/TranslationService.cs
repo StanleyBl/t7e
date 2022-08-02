@@ -25,17 +25,6 @@ namespace t7e.db.Services
 
         public async Task<List<TranslationKeyDto>> GetTranslationsForProjectAsync(Guid projectId, string searchTerm = null)
         {
-            //var result = await _ctx.TranslationKeys
-            //    .Include(e => e.Project)
-            //    .ThenInclude(e => e.ProjectLanguages)
-            //    .ThenInclude(e => e.Language)
-            //    .Include(e => e.Translations)
-            //    .ThenInclude(e => e.Language)
-            //    .Where(x => x.ProjectId == projectId)
-            //    .OrderByDescending(x => x.Created)
-            //    .AsNoTracking()
-            //    .ToListAsync();
-
             var query = _ctx.TranslationKeys
                 .Include(e => e.Project)
                 .ThenInclude(e => e.ProjectLanguages)

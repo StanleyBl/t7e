@@ -34,6 +34,7 @@ import { KeyAddEditDialogComponent } from './layout/project-translations/key-add
 import { TranslationKeyComponent } from './layout/project-translations/translation-key/translation-key.component';
 import { TranslationInputComponent } from './layout/project-translations/translation-key/translation-input/translation-input.component';
 import { StatusBarComponent } from './layout/Shared/Components/status-bar/status-bar.component';
+import { UploadFileComponent } from './layout/project-translations/upload-file/upload-file.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { StatusBarComponent } from './layout/Shared/Components/status-bar/status
     KeyAddEditDialogComponent,
     TranslationKeyComponent,
     TranslationInputComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,

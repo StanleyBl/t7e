@@ -41,6 +41,7 @@ namespace t7e
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<ITranslationService, TranslationService>();
             services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<IImportExportService, ImportExportService>();
 
             services.AddCors(options =>
             {
