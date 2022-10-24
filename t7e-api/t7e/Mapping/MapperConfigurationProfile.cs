@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using t7e.common.Dtos;
+using t7e.common.Models;
 using t7e.db.Entities;
 
 namespace t7e.Mapping
@@ -77,6 +78,8 @@ namespace t7e.Mapping
                 });
 
             CreateMap<Translation, TranslationDto>().ReverseMap();
+
+            CreateMap<ImportFile, ImportTranslation>();
         }
     }
 }

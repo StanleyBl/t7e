@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using t7e.common.Dtos;
+using t7e.common.Models;
 using t7e.db.Context;
 using t7e.db.Entities;
 using t7e.db.Services.Interfaces;
@@ -130,6 +131,52 @@ namespace t7e.db.Services
             await _ctx.SaveChangesAsync();
 
             return _mapper.Map<TranslationDto>(currentTranslation);
+        }
+
+        public async Task ImportFromDictionaryAsync(ImportTranslation model)
+        {
+            var existing = await _ctx.Translations
+                .Include(e => e.TranslationKey)
+                .Where(x => x.TranslationKey.ProjectId == model.ProjectId)
+                .ToListAsync();
+
+            foreach (var entry in model.Translations)
+            {
+                var current = existing.FirstOrDefault(x => x.TranslationKey.Key == entry.Key);
+
+                if (current == null)
+                {
+                    var newKey = new TranslationKey
+                    {
+                        Created = DateTime.Now,
+                        Id = Guid.NewGuid(),
+                        ProjectId = model.ProjectId,
+                        Key = entry.Key,
+                        Updated = DateTime.Now,
+                    };
+
+                     var translation = new Translation
+                     {
+                         LanguageId = model.LanguageId,
+                         Id = Guid.NewGuid(),
+                         Reviewed = model.MarkNewAsReviewed,
+                         TranslationKeyId = newKey.Id,
+                         Value = entry.Value
+                     };
+
+                    newKey.Translations.Add(translation);
+
+                    _ctx.TranslationKeys.Add(newKey);
+                    continue;
+                }
+
+                if (!model.OverrideExisting) continue;
+
+                current.Value = entry.Value;
+                current.Reviewed = false;
+            }
+
+            await _ctx.SaveChangesAsync();
         }
     }
 }

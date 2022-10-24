@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using t7e.common.Dtos;
+using t7e.common.Models;
 
 namespace t7e.db.Services.Interfaces
 {
@@ -18,5 +19,7 @@ namespace t7e.db.Services.Interfaces
         Task RemoveKeyAsync(Guid id);
 
         Task<TranslationDto> UpdateTranslationAsync(TranslationDto translation);
+
+        Task ImportFromDictionaryAsync(ImportTranslation model);
     }
 }

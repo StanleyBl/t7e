@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +15,8 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
 @Component({
   selector: 'app-project-translations',
   templateUrl: './project-translations.component.html',
-  styleUrls: ['./project-translations.component.scss']
+  styleUrls: ['./project-translations.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectTranslationsComponent implements OnInit {
 

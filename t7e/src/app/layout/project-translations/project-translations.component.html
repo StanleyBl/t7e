@@ -19,7 +19,11 @@
 
 
 <div class="translation-list">
-    <div class="list-item" *ngFor="let key of translationKeys">
-        <app-translation-key [key]="key"></app-translation-key>
-    </div>
+    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="400" maxBufferPx="800" class="example-viewport">
+        <div *cdkVirtualFor="let key of translationKeys;" class="list-item">
+            <app-translation-key [key]="key"></app-translation-key>
+        </div>
+    </cdk-virtual-scroll-viewport>
+    <!-- <div class="list-item" *ngFor="let key of translationKeys">
+    </div> -->
 </div>

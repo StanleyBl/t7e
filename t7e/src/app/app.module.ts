@@ -23,6 +23,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 
+import {ScrollingModule} from '@angular/cdk/scrolling';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectComponent } from './layout/project/project.component';
@@ -74,7 +76,8 @@ import { UploadFileComponent } from './layout/project-translations/upload-file/u
     MatSnackBarModule,
     MatTabsModule,
     MatRadioModule,
-    MatSliderModule
+    MatSliderModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
